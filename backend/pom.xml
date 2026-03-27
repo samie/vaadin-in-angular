@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.example</groupId>
+        <artifactId>todo-app</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>backend</artifactId>
+    <packaging>jar</packaging>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-bom</artifactId>
+                <version>${vaadin.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <dependencies>
+        <!--
+            spring-boot-starter-web is intentionally omitted here.
+            vaadin-spring-boot-starter pulls it in transitively.
+        -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+
+        <!-- Vaadin Flow — server-side UI and WebComponentExporter -->
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-spring-boot-starter</artifactId>
+        </dependency>
+
+        <!--Vaadin dev tools are a separate optional dependency. -->
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-dev</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+        <!-- Vaadin Collaboration Engine — server-to-browser push via shared topics -->
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>collaboration-engine</artifactId>
+        </dependency>
+    </dependencies>
+
+    <!--
+        prod profile: bundles the Angular SPA into the fat jar.
+        Only needed for production — in development Angular runs on its own dev server.
+
+        Usage:
+          dev:  mvn spring-boot:run                (backend only, Angular on :4200)
+          prod: mvn package -Pprod  (from root)    (single deployable jar)
+    -->
+    <profiles>
+        <profile>
+            <id>prod</id>
+            <dependencies>
+                <dependency>
+                    <groupId>com.example</groupId>
+                    <artifactId>frontend</artifactId>
+                    <version>${project.version}</version>
+                    <scope>runtime</scope>
+                </dependency>
+            </dependencies>
+        </profile>
+    </profiles>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>${spring-boot.version}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-maven-plugin</artifactId>
+                <version>${vaadin.version}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>prepare-frontend</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>

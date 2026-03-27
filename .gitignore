@@ -1,0 +1,21 @@
+# Maven
+backend/target/
+backend/*.class
+
+# Node / Angular
+frontend/node_modules/
+frontend/dist/
+frontend/.angular/
+
+# H2 database files
+backend/data/
+
+# IDE
+.idea/
+*.iml
+.vscode/
+*.swp
+
+# OS
+.DS_Store
+backend/src/main/frontend/generated

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.example</groupId>
+        <artifactId>todo-app</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>frontend</artifactId>
+    <packaging>jar</packaging>
+
+    <build>
+        <plugins>
+            <!--
+                Installs a local Node/npm and runs the Angular build.
+                No system-wide Node required — reproducible across all developer machines.
+            -->
+            <plugin>
+                <groupId>com.github.eirslett</groupId>
+                <artifactId>frontend-maven-plugin</artifactId>
+                <version>1.15.1</version>
+                <configuration>
+                    <nodeVersion>v22.11.0</nodeVersion>
+                    <npmVersion>10.9.0</npmVersion>
+                    <workingDirectory>.</workingDirectory>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>install-node-npm</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>install-node-and-npm</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>npm-install</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>npm</goal>
+                        </goals>
+                        <configuration>
+                            <arguments>install</arguments>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>npm-build</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>npm</goal>
+                        </goals>
+                        <configuration>
+                            <arguments>run build</arguments>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!--
+                Copies the Angular production build into META-INF/resources/ so that
+                Spring Boot (via the backend dependency) serves the SPA from the classpath.
+                Angular 17+ builder outputs to dist/{project}/browser/.
+            -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy-angular-dist</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.outputDirectory}/META-INF/resources</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>dist/todo-app/browser</directory>
+                                    <filtering>false</filtering>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>

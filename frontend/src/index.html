@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Todo App</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!--
+    Vaadin Flow web component bundle.
+    This script registers <todo-grid> as a custom element and establishes
+    a WebSocket back-channel to the Vaadin server on port 8080.
+
+    The URL is served by Vaadin's WebComponentExporter infrastructure.
+    All subsequent <todo-grid> communication goes directly to :8080 —
+    Angular's dev-server proxy is NOT involved after this initial load.
+
+    CORS is configured in WebConfig.java to allow this cross-origin script load.
+  -->
+  <!-- Vaadin web component bundle is injected dynamically from main.ts
+       so Vite's pre-transform step never tries to resolve the proxied URL. -->
+</head>
+<body>
+  <app-root></app-root>
+</body>
+</html>
