@@ -53,11 +53,6 @@
             <optional>true</optional>
         </dependency>
 
-        <!-- Vaadin Collaboration Engine — server-to-browser push via shared topics -->
-        <dependency>
-            <groupId>com.vaadin</groupId>
-            <artifactId>collaboration-engine</artifactId>
-        </dependency>
     </dependencies>
 
     <!--
