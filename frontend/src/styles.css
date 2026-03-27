@@ -48,7 +48,7 @@ h1 {
 }
 
 .add-form input:focus {
-  border-color: #888;
+  border: 2px solid #333
 }
 
 .add-form button {
@@ -73,12 +73,13 @@ h1 {
 
 /* ── Vaadin DatePicker — match Angular input style ───── */
 todo-date-picker {
+    --vaadin-input-field-padding: 10px;
     --vaadin-input-field-border-width: 1px;
     --vaadin-input-field-border-color: #ddd;
     --vaadin-input-field-border-radius: 4px;
-    --vaadin-input-field-focus-border-color: red;
-    --vaadin-input-field-focus-border-width: 1px;
 }
+
+
 
 /* ── Footer ───────────────────────────────────────────── */
 .footer {
