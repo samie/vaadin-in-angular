@@ -1,13 +1,18 @@
-# Maven
+# Maven / Java / Backend
 backend/target/
 backend/*.class
+backend/src/main/frontend/generated
+backend/src/main/bundles/prod.bundle
 
-# Node / Angular
+# Node / Angular /Frontend
 frontend/node_modules/
 frontend/dist/
 frontend/.angular/
+frontend/node
+frontend/target
 
 # H2 database files
+data
 backend/data/
 
 # IDE
@@ -18,5 +23,3 @@ backend/data/
 
 # OS
 .DS_Store
-backend/src/main/frontend/generated
-data
