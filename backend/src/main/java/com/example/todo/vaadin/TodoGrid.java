@@ -62,7 +62,6 @@ public class TodoGrid extends Grid<Todo> {
         // Delete button triggers a server-side DB delete not REST call
         addComponentColumn(todo -> {
             Button btn = new Button("✕");
-            btn.addThemeVariants(ButtonVariant.LUMO_ERROR, ButtonVariant.LUMO_TERTIARY_INLINE);
             btn.addClickListener(e -> {
                 service.delete(todo.getId());
                 refresh();
