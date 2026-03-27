@@ -3,6 +3,8 @@
 This project is intentionally optimized for Angular developers trying 
 Vaadin web components in a modern Angular app.
 
+<img width="437" height="355" alt="vaadin-in-angular" src="https://github.com/user-attachments/assets/f0220164-e5b3-4bdc-9f39-1c81c5d81e31" />
+
 - Angular keeps app state with NgRx (`addTodo`, `setFilter`, loading/error state).
 - Vaadin provides exported web components used in Angular templates:
   - `<todo-grid>` for server-backed [Grid](https://vaadin.com/docs/latest/components/grid) rendering and actions.
